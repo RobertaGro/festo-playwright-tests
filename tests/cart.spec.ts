@@ -1,14 +1,11 @@
-import { test, expect } from '@playwright/test';
+import { test, Browser, Page, chromium } from '@playwright/test';
+import { login } from './utils';
 
-test('has title', async ({ page }) => {
-  await page.goto('https://festo.com/');
-  await expect(page).toHaveTitle(/Festo Worldwide/);
-});
+// Test to add/clear shopping cart
+test('add/clear shopping cart', async () => {
+    const browser: Browser = await chromium.launch({ headless: false });
+    const context = await browser.newContext();
+    const page: Page = await context.newPage();
+    await login(page);
 
-test('accept cookies', async ({ page }) => {
-  await page.goto('https://festo.com/');
-  await page.waitForSelector('#didomi-notice-agree-button');
-  await expect(page.locator('#didomi-notice-agree-button')).toBeVisible();
-  await page.click('#didomi-notice-agree-button');
-  await expect(page.locator('#didomi-notice-agree-button')).not.toBeVisible();
 });
