@@ -1,4 +1,5 @@
 import { test, expect, Browser, Page, chromium, Locator } from '@playwright/test';
+import { applyForJobSelectors as s } from './selectors';
 import { login } from './utils';
 
 // Test to apply for a job
@@ -7,24 +8,23 @@ test('apply for a job', async () => {
     const context = await browser.newContext({viewport: null, deviceScaleFactor: undefined});
     const page: Page = await context.newPage();
     await login(page);
-    await page.waitForSelector('a.text-link--_f5q7', { state: 'visible' });
-    await page.click('a.text-link--_f5q7:has-text("Careers")');
-    await page.waitForSelector('a.text-link--_f5q7 >> text=Vacancies and applications', { state: 'visible' });
-    await page.click('a.text-link--_f5q7 >> text=Vacancies and applications');
+    await page.waitForSelector(s.menuLinkSelector, { state: 'visible' });
+    await page.click(s.careerSelector);
+    await page.waitForSelector(s.vacanciesSelector, { state: 'visible' });
+    await page.click(s.vacanciesSelector);
     await expect(page).toHaveURL(/vacancies-and-applications.*/);
 
     const [newTab] = await Promise.all([
-        context.waitForEvent('page'),            // wait for new tab
-        page.click('text=Apply now'),            // your button or link
+        context.waitForEvent('page'),
+        page.click('text=Apply now'),      
     ]);
-    // Wait for it to load
+
     await newTab.waitForLoadState();
 
-    // Check title and switch if it matches
     if ((await newTab.title()).includes('QA Engineer')) {
         await newTab.bringToFront();
     }
-    await newTab.click('#cookie-accept');
+    await newTab.click(s.cookieAcceptSelector);
 
     await newTab.click('a.jobTitle-link:has-text("QA Engineer")');
     await newTab.click('text=Apply now');

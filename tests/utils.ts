@@ -1,11 +1,8 @@
 import { Page, Locator } from '@playwright/test';
-
+import { commonSelectors as s } from './selectors';
 // Helper function to log in
 export async function login(page: Page) {
-    await page.goto("https://festo.com/");
-    await page.waitForSelector('#didomi-notice-agree-button');
-    await page.click('#didomi-notice-agree-button');
-    await page.getByText('Lithuania').click();
+    handleCookieAccept(page);
     await page.click('.login-icon--D0yN8');
     
     const emailId: Locator = page.locator('[id="username"]');
@@ -17,4 +14,12 @@ export async function login(page: Page) {
     await continueButton.click();
     await password.fill("iu|V#m4lZ9312_");
     await loginButton.click();
+}
+
+
+export async function handleCookieAccept(page: Page) {
+    await page.goto("https://festo.com/");
+    await page.waitForSelector(s.didomiNoticeAgreeButton);
+    await page.click(s.didomiNoticeAgreeButton);
+    await page.getByText('Lithuania').click();
 }
