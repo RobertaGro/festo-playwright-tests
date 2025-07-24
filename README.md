@@ -37,7 +37,7 @@ This repository contains automated UI tests for the Festo website using [Playwri
 ### 1. Shopping Cart (`cart.spec.ts`)
 - Logs in to the site.
 - Empties the cart if needed.
-- Adds products ("Servo drive", "Motion terminal") to the cart.
+- Adds products (from "Servo drive", "Motion terminal") to the cart.
 - Verifies successful addition messages.
 - Clears the cart and checks for the empty cart message.
 
@@ -57,11 +57,16 @@ This repository contains automated UI tests for the Festo website using [Playwri
 ### 4. Contact Us Form (`contact-us.spec.ts`)
 - Handles cookie consent.
 - Navigates to the contact form.
-- Fills out and submits the form.
+- Fills out the form.
 - Verifies validation feedback for required fields.
 
-### 5. Cart Management (`cart.spec.ts`)
-- (Duplicate filename, but covers the same flow as above.)
+### 5. Apply for Job (`apply-for-job.spec.ts`)
+- Logs in to the site.
+- Navigates to the Careers section and opens Vacancies and Applications.
+- Clicks "Apply now" to open a new tab for job application.
+- Selects the "QA Engineer" position and starts the application process.
+- Fills in login credentials the application.
+- Verifies the application page title.
 
 ## Customization
 
