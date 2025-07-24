@@ -8,6 +8,8 @@ This repository contains automated UI tests for the Festo website using [Playwri
 - [Playwright](https://playwright.dev/docs/intro)
 - Chrome, Firefox, and WebKit browsers (Playwright can install these automatically)
 
+## Project Structure
+
 ## How to Run
 
 1. Install dependencies:
@@ -25,7 +27,12 @@ This repository contains automated UI tests for the Festo website using [Playwri
    npx playwright test tests/cart.spec.ts
    ```
 
-## Test Overview
+4. Run in a playwright debugger:
+   ```sh
+   npx playwright test --ui
+   ```
+
+## Tests Overview
 
 ### 1. Shopping Cart (`cart.spec.ts`)
 - Logs in to the site.
